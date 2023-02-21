@@ -5,11 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="electronicAndControl.css">
+    <script src="electronicAndControl.js"></script>
 </head>
 <body>
-    <select name="" id="">
-        <option value="">Seleccione una opción</option>
-        <option value="1">Resistor Equivalente</option>
-    </select>
+    <header>
+        <select name="" id="menu">
+            <option value="">Seleccione una opción</option>
+            <option value="1">Resistor Equivalente</option>
+        </select>
+    </header>
+    <main>
+        <section id="option-menu-1" style="display: none;">
+            <fieldset>
+                <legend>Ingrese los datos</legend>
+                <label for="">Resistencia 1: <input class="data-1" type="number"></label>
+                <label for="">Resistencia 2: <input class="data-1" type="number"></label>
+                <button type="button">Agregar más campos ( + )</button>
+                <input id="equivalent-resistance" type="submit" value="Calcular">
+            </fieldset>
+            <fieldset>
+                <legend>RESULTADO</legend>
+                <label for=""><textarea disabled name="" id="" cols="30" rows="10"></textarea></label>
+            </fieldset>
+        </section>
+        
+        
+
+    </main>
+    <footer>
+
+    </footer>
 </body>
 </html>
