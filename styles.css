@@ -1,0 +1,34 @@
+header {
+    width: 25%;
+    height: 50px;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25em;
+    border-radius: 10px;
+}
+
+h1 {
+    color: #f1be32;
+    font-size: min(5vw, 1.2em);
+    font-family: Verdana, sans-serif;
+}
+
+
+body {
+    background-color:  azure;
+}
+
+main {
+    padding: 1rem;
+}
+
+
+.menu{
+    width: 350px;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
