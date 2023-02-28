@@ -1,9 +1,18 @@
+.option-menu {
+    width: 350px;
+}
+
 section {
     display: flex;
     gap: 1rem;
 }
 
-input {
+input, textarea {
     display: block;
     margin: 0.5rem 0;
+}
+
+#show-result  {
+    text-align: center;
+    font-size: 2rem;
 }

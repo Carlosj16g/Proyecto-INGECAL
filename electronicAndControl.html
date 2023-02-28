@@ -1,40 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ELECTRONIC AND CONTROL</title>
     <link rel="stylesheet" href="electronicAndControl.css">
     <script src="electronicAndControl.js"></script>
 </head>
+
 <body>
     <header>
         <select name="" id="menu">
             <option value="">Seleccione una opción</option>
-            <option value="1">Resistor Equivalente</option>
+            <option value="1">Resistencia Equivalente</option>
+            <option value="2">Capacitor Equivalente</option>
+            <option value="3">Inductor Equivalente</option>
         </select>
     </header>
     <main>
-        <section id="option-menu-1" style="display: none;">
-            <fieldset>
-                <legend>Ingrese los datos</legend>
-                <label for="">Resistencia 1: <input class="data-1" type="number"></label>
-                <label for="">Resistencia 2: <input class="data-1" type="number"></label>
-                <button type="button">Agregar más campos ( + )</button>
-                <input id="equivalent-resistance" type="submit" value="Calcular">
-            </fieldset>
-            <fieldset>
-                <legend>RESULTADO</legend>
-                <label for=""><textarea disabled name="" id="" cols="30" rows="10"></textarea></label>
-            </fieldset>
-        </section>
-        
-        
+        <div class="option-menu">
+            <section id="option-menu-1" style="display: none;">
+                <fieldset>
+                    <legend>Ingrese los datos</legend>
+                    <div id="fields">
+                        <label for="">Resistencia 1: <input class="data-1" type="number"></label>
+                        <label for="">Resistencia 2: <input class="data-1" type="number"></label>
+                    </div>
+                    <button id="add-fields" type="button">Agregar más campos ( + )</button>
+                    <input id="equivalent-resistance" type="submit" value="Calcular">
+                </fieldset>
+                <fieldset>
+                    <legend>RESULTADO</legend>
+                    <label for="show-result"><textarea disabled name="" id="show-result" cols="10" rows="5">Waiting Data ...</textarea></label>
+                </fieldset>
+            </section>
+        </div>
+
+
 
     </main>
     <footer>
 
     </footer>
 </body>
+
 </html>
