@@ -1,10 +1,13 @@
 .option-menu {
-    width: 350px;
+    width: 500px;
 }
 
 section {
     display: flex;
     gap: 1rem;
+    margin: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 input, textarea {
@@ -15,4 +18,9 @@ input, textarea {
 #show-result  {
     text-align: center;
     font-size: 2rem;
+}
+
+.center {
+    margin: auto;
+    text-align: center;
 }
