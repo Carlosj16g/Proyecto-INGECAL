@@ -41,7 +41,27 @@
                 </fieldset>
             </section>
         </div>
-
+        <div class="option-menu">
+            <section id="option-menu-2" style="display: none;">
+                <fieldset>
+                    <legend>Ingrese los datos</legend>
+                    <div id="inductor-fields">
+                        <label for="">Inductor 1: <input class="data-2" type="number"></label>
+                        <label for="">Inductor 2: <input class="data-2" type="number"></label>
+                    </div>
+                    <button id="add-inductor-fields" type="button">Agregar más campos ( + )</button>
+                    <input id="equivalent-inductor" type="submit" value="Calcular">
+                </fieldset>
+                <fieldset>
+                    <legend>RESULTADO</legend>
+                    <label for="show-result"><textarea disabled name="" id="show-inducto-result" cols="10" rows="5">Waiting Data ...</textarea></label>
+                    <div class="center">
+                        <button id="iductor-serie" style="display: none;" type="button">Serie</button>
+                        <button id="inductor-paralelo" style="display: none;" type="button">Paralelo</button>
+                    </div>
+                </fieldset>
+            </section>
+        </div>
 
 
     </main>
