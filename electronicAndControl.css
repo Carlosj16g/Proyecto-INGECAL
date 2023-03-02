@@ -15,7 +15,7 @@ input, textarea {
     margin: 0.5rem 0;
 }
 
-#show-result  {
+#show-result, #show-inductor-result  {
     text-align: center;
     font-size: 2rem;
 }
