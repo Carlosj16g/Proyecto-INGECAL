@@ -2,6 +2,7 @@ function iniciarMenu() {
 
     startOption1();
     startOption2();
+    startOption3();
 }
 
 
@@ -76,7 +77,7 @@ function startOption1() {
     })
 }
 
-function startOption2() {
+function startOption3() {
     for (let inductor of document.getElementsByClassName("data-3")) {
         inductor.addEventListener("click", function () {
             document.getElementById("show-inductor-result").value = "Waiting Data ...";
@@ -143,6 +144,77 @@ function startOption2() {
             })
         } else {
             document.getElementById("option-menu-3").style.display = "none";
+        }
+    })
+}
+
+function startOption2() {
+    for (let capacitor of document.getElementsByClassName("data-2")) {
+        capacitor.addEventListener("click", function () {
+            document.getElementById("show-capacitor-result").value = "Waiting Data ...";
+            document.getElementById("capacitor-serie").style.display = "none";
+            document.getElementById("capacitor-paralelo").style.display = "none";
+        })
+    }
+
+    document.getElementById("add-capacitor-fields").addEventListener("click", function () {
+        let totalFields = document.getElementsByClassName("data-2").length;
+        document.getElementById("capacitor-fields").insertAdjacentHTML("beforeend", `<label for="">Capacitor ${totalFields + 1}: <input class="data-2" type="number"></label>`);
+        let count = 0;
+        for (let capacitor of document.getElementsByClassName("data-2")) {
+            if (count >= totalFields - 1) {
+                capacitor.addEventListener("click", function () {
+                    document.getElementById("show-capacitor-result").value = "Waiting Data ...";
+                    document.getElementById("capacitor-serie").style.display = "none";
+                    document.getElementById("capacitor-paralelo").style.display = "none";
+                })
+            } else {
+                count += 1;
+                continue;
+            }
+        }
+    })
+
+    let menu = document.getElementById("menu");
+    menu.addEventListener("change", function () {
+        let optionSelected = menu.options[menu.selectedIndex].getAttribute("value");
+        if (optionSelected === "2") {
+            document.getElementById("option-menu-2").style.display = "flex";
+            document.getElementById("equivalent-capacitor").addEventListener("click", function () {
+
+                document.getElementById("show-capacitor-result").value = "Waiting Data ..."
+
+                let capacitors = [];
+                for (let capacitor of document.getElementsByClassName("data-2")) {
+                    if (capacitor.value !== "") {
+                        capacitors.push(parseFloat(capacitor.value));
+                    } else {
+                        capacitors = [];
+                        break;
+                    }
+                }
+                console.log("capacitors.length", capacitors.length);
+                if (capacitors.length) {
+
+                    document.getElementById("show-capacitor-result").value = "Structure?"
+
+                    document.getElementById("capacitor-serie").style.display = "inline-block";
+                    document.getElementById("capacitor-paralelo").style.display = "inline-block";
+
+                    document.getElementById("capacitor-serie").addEventListener("click", function () {
+                        let result = getEquivalentCapacitorSerie(capacitors);
+                        document.getElementById("show-capacitor-result").value = result.toFixed(3);
+                    });
+                    document.getElementById("capacitor-paralelo").addEventListener("click", function () {
+                        let result = getEquivalentCapacitorParalelo(capacitors);
+                        document.getElementById("show-capacitor-result").value = result.toFixed(3);
+                    });
+                } else {
+                    alert("Complete los campos");
+                }
+            })
+        } else {
+            document.getElementById("option-menu-2").style.display = "none";
         }
     })
 }
