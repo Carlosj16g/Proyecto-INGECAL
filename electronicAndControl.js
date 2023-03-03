@@ -3,6 +3,7 @@ function iniciarMenu() {
     startOption1();
     startOption2();
     startOption3();
+    startOption4();
 }
 
 
@@ -73,77 +74,6 @@ function startOption1() {
             })
         } else {
             document.getElementById("option-menu-1").style.display = "none";
-        }
-    })
-}
-
-function startOption3() {
-    for (let inductor of document.getElementsByClassName("data-3")) {
-        inductor.addEventListener("click", function () {
-            document.getElementById("show-inductor-result").value = "Waiting Data ...";
-            document.getElementById("inductor-serie").style.display = "none";
-            document.getElementById("inductor-paralelo").style.display = "none";
-        })
-    }
-
-    document.getElementById("add-inductor-fields").addEventListener("click", function () {
-        let totalFields = document.getElementsByClassName("data-3").length;
-        document.getElementById("inductor-fields").insertAdjacentHTML("beforeend", `<label for="">Inductor ${totalFields + 1}: <input class="data-3" type="number"></label>`);
-        let count = 0;
-        for (let inductor of document.getElementsByClassName("data-3")) {
-            if (count >= totalFields - 1) {
-                inductor.addEventListener("click", function () {
-                    document.getElementById("show-inductor-result").value = "Waiting Data ...";
-                    document.getElementById("inductor-serie").style.display = "none";
-                    document.getElementById("inductor-paralelo").style.display = "none";
-                })
-            } else {
-                count += 1;
-                continue;
-            }
-        }
-    })
-
-    let menu = document.getElementById("menu");
-    menu.addEventListener("change", function () {
-        let optionSelected = menu.options[menu.selectedIndex].getAttribute("value");
-        if (optionSelected === "3") {
-            document.getElementById("option-menu-3").style.display = "flex";
-            document.getElementById("equivalent-inductor").addEventListener("click", function () {
-
-                document.getElementById("show-inductor-result").value = "Waiting Data ..."
-
-                let inductors = [];
-                for (let inductor of document.getElementsByClassName("data-3")) {
-                    if (inductor.value !== "") {
-                        inductors.push(parseFloat(inductor.value));
-                    } else {
-                        inductors = [];
-                        break;
-                    }
-                }
-                console.log("inductors.length", inductors.length);
-                if (inductors.length) {
-
-                    document.getElementById("show-inductor-result").value = "Structure?"
-
-                    document.getElementById("inductor-serie").style.display = "inline-block";
-                    document.getElementById("inductor-paralelo").style.display = "inline-block";
-
-                    document.getElementById("inductor-serie").addEventListener("click", function () {
-                        let result = getEquivalentInductorSerie(inductors);
-                        document.getElementById("show-inductor-result").value = result.toFixed(3);
-                    });
-                    document.getElementById("inductor-paralelo").addEventListener("click", function () {
-                        let result = getEquivalentInductorParalelo(inductors);
-                        document.getElementById("show-inductor-result").value = result.toFixed(3);
-                    });
-                } else {
-                    alert("Complete los campos");
-                }
-            })
-        } else {
-            document.getElementById("option-menu-3").style.display = "none";
         }
     })
 }
@@ -219,6 +149,118 @@ function startOption2() {
     })
 }
 
+function startOption3() {
+    for (let inductor of document.getElementsByClassName("data-3")) {
+        inductor.addEventListener("click", function () {
+            document.getElementById("show-inductor-result").value = "Waiting Data ...";
+            document.getElementById("inductor-serie").style.display = "none";
+            document.getElementById("inductor-paralelo").style.display = "none";
+        })
+    }
+
+    document.getElementById("add-inductor-fields").addEventListener("click", function () {
+        let totalFields = document.getElementsByClassName("data-3").length;
+        document.getElementById("inductor-fields").insertAdjacentHTML("beforeend", `<label for="">Inductor ${totalFields + 1}: <input class="data-3" type="number"></label>`);
+        let count = 0;
+        for (let inductor of document.getElementsByClassName("data-3")) {
+            if (count >= totalFields - 1) {
+                inductor.addEventListener("click", function () {
+                    document.getElementById("show-inductor-result").value = "Waiting Data ...";
+                    document.getElementById("inductor-serie").style.display = "none";
+                    document.getElementById("inductor-paralelo").style.display = "none";
+                })
+            } else {
+                count += 1;
+                continue;
+            }
+        }
+    })
+
+    let menu = document.getElementById("menu");
+    menu.addEventListener("change", function () {
+        let optionSelected = menu.options[menu.selectedIndex].getAttribute("value");
+        if (optionSelected === "3") {
+            document.getElementById("option-menu-3").style.display = "flex";
+            document.getElementById("equivalent-inductor").addEventListener("click", function () {
+
+                document.getElementById("show-inductor-result").value = "Waiting Data ..."
+
+                let inductors = [];
+                for (let inductor of document.getElementsByClassName("data-3")) {
+                    if (inductor.value !== "") {
+                        inductors.push(parseFloat(inductor.value));
+                    } else {
+                        inductors = [];
+                        break;
+                    }
+                }
+                console.log("inductors.length", inductors.length);
+                if (inductors.length) {
+
+                    document.getElementById("show-inductor-result").value = "Structure?"
+
+                    document.getElementById("inductor-serie").style.display = "inline-block";
+                    document.getElementById("inductor-paralelo").style.display = "inline-block";
+
+                    document.getElementById("inductor-serie").addEventListener("click", function () {
+                        let result = getEquivalentInductorSerie(inductors);
+                        document.getElementById("show-inductor-result").value = result.toFixed(3);
+                    });
+                    document.getElementById("inductor-paralelo").addEventListener("click", function () {
+                        let result = getEquivalentInductorParalelo(inductors);
+                        document.getElementById("show-inductor-result").value = result.toFixed(3);
+                    });
+                } else {
+                    alert("Complete los campos");
+                }
+            })
+        } else {
+            document.getElementById("option-menu-3").style.display = "none";
+        }
+    })
+}
+
+function startOption4() {
+    for (let circuitElement of document.getElementsByClassName("data-4")) {
+        circuitElement.addEventListener("click", function () {
+            document.getElementById("show-resistance-result").value = "Waiting Data ...";
+        })
+    }
+
+    let menu = document.getElementById("menu");
+    menu.addEventListener("change", function () {
+        let optionSelected = menu.options[menu.selectedIndex].getAttribute("value");
+        if (optionSelected === "4") {
+            document.getElementById("option-menu-4").style.display = "flex";
+            document.getElementById("necessary-resistance").addEventListener("click", function () {
+
+                document.getElementById("show-resistance-result").value = "Waiting Data ..."
+
+                let circuitElements = [];
+                for (let circuitElement of document.getElementsByClassName("data-4")) {
+                    if (circuitElement.value !== "") {
+                        circuitElements.push(parseFloat(circuitElement.value));
+                    } else {
+                        circuitElements = [];
+                        break;
+                    }
+                }
+                console.log("circuitElements.length", circuitElements.length);
+                if (circuitElements.length) {
+
+                    let result = getNecessaryResistance(circuitElements[0], circuitElements[1]);
+                    document.getElementById("show-resistance-result").value = result.toFixed(3);
+
+                } else {
+                    alert("Complete los campos");
+                }
+            })
+        } else {
+            document.getElementById("option-menu-4").style.display = "none";
+        }
+    })
+}
+
 function getEquivalentResistanceSerie(resistances) {
     let result = 0;
     resistances.map(resistance => {
@@ -249,6 +291,10 @@ function getEquivalentInductorSerie(inductors) {
 
 function getEquivalentInductorParalelo(inductors) {
     return getEquivalentResistanceParalelo(inductors);
+}
+
+function getNecessaryResistance(voltage, current){
+    return voltage / current;
 }
 
 window.addEventListener("load", iniciarMenu);

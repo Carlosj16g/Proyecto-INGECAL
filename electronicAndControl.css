@@ -10,12 +10,16 @@ section {
     justify-content: center;
 }
 
-input, textarea {
+input,
+textarea {
     display: block;
     margin: 0.5rem 0;
 }
 
-#show-result, #show-inductor-result, #show-capacitor-result  {
+#show-result,
+#show-inductor-result,
+#show-capacitor-result,
+#show-resistance-result {
     text-align: center;
     font-size: 2rem;
 }

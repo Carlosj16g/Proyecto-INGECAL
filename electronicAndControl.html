@@ -17,6 +17,7 @@
             <option value="1">Resistencia Equivalente</option>
             <option value="2">Capacitor Equivalente</option>
             <option value="3">Inductor Equivalente</option>
+            <option value="4">Resistencia Necesaria</option>
         </select>
     </header>
     <main>
@@ -86,6 +87,22 @@
             </section>
         </div>
 
+        <div class="option-menu">
+            <section id="option-menu-4" style="display: none;">
+                <fieldset>
+                    <legend>Ingrese los datos</legend>
+                    <div id="circuit-fields">
+                        <label for="">Voltaje: <input class="data-4" type="number"></label>
+                        <label for="">Corriente: <input class="data-4" type="number"></label>
+                    </div>
+                    <input id="necessary-resistance" type="submit" value="Calcular">
+                </fieldset>
+                <fieldset>
+                    <legend>RESULTADO</legend>
+                    <label for="show-resistance-result"><textarea disabled name="" id="show-resistance-result" cols="10" rows="5">Waiting Data ...</textarea></label>
+                </fieldset>
+            </section>
+        </div>
 
     </main>
     <footer>
