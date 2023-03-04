@@ -271,7 +271,7 @@ function startOption5() {
 
     document.getElementById("add-resistance-fields-5").addEventListener("click", function () {
         let totalFields = document.getElementsByClassName("data-5").length;
-        document.getElementById("resistance-fields-5").insertAdjacentHTML("beforeend", `<label for="">Resistance ${totalFields + 1}: <input class="data-5" type="number"></label>`);
+        document.getElementById("resistance-fields-5").insertAdjacentHTML("beforeend", `<label for="">Resistance ${totalFields}: <input class="data-5" type="number"></label>`);
         let count = 0;
         for (let resistance of document.getElementsByClassName("data-5")) {
             if (count >= totalFields - 1) {
