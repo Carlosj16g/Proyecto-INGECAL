@@ -18,6 +18,7 @@
             <option value="2">Capacitor Equivalente</option>
             <option value="3">Inductor Equivalente</option>
             <option value="4">Resistencia Necesaria</option>
+            <option value="5">Divisor de Voltaje</option>
         </select>
     </header>
     <main>
@@ -100,6 +101,25 @@
                 <fieldset>
                     <legend>RESULTADO</legend>
                     <label for="show-resistance-result"><textarea disabled name="" id="show-resistance-result" cols="10" rows="5">Waiting Data ...</textarea></label>
+                </fieldset>
+            </section>
+        </div>
+
+        <div class="option-menu">
+            <section id="option-menu-5" style="display: none;">
+                <fieldset>
+                    <legend>Ingrese los datos</legend>
+                    <label for="">Voltaje: <input class="data-5" type="number"></label>
+                    <div id="resistance-fields-5">
+                        <label for="">Resistance 1: <input class="data-5" type="number"></label>
+                        <label for="">Resistance 2: <input class="data-5" type="number"></label>
+                    </div>
+                    <button id="add-resistance-fields-5" type="button">Agregar más campos ( + )</button>
+                    <input id="voltage-divider" type="submit" value="Calcular">
+                </fieldset>
+                <fieldset>
+                    <legend>RESULTADO</legend>
+                    <label for="show-resistance-results-5"><textarea disabled name="" id="show-resistance-results-5" cols="10" rows="5">Waiting Data ...</textarea></label>
                 </fieldset>
             </section>
         </div>

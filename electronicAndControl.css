@@ -24,6 +24,11 @@ textarea {
     font-size: 2rem;
 }
 
+#show-resistance-results-5 {
+    text-align: center;
+    font-size: 1rem;
+}
+
 .center {
     margin: auto;
     text-align: center;

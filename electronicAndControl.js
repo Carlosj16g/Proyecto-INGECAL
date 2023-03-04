@@ -4,6 +4,7 @@ function iniciarMenu() {
     startOption2();
     startOption3();
     startOption4();
+    startOption5();
 }
 
 
@@ -261,6 +262,73 @@ function startOption4() {
     })
 }
 
+function startOption5() {
+    for (let circuitElement of document.getElementsByClassName("data-5")) {
+        circuitElement.addEventListener("click", function () {
+            document.getElementById("show-resistance-results-5").value = "Waiting Data ...";
+        })
+    }
+
+    document.getElementById("add-resistance-fields-5").addEventListener("click", function () {
+        let totalFields = document.getElementsByClassName("data-5").length;
+        document.getElementById("resistance-fields-5").insertAdjacentHTML("beforeend", `<label for="">Resistance ${totalFields + 1}: <input class="data-5" type="number"></label>`);
+        let count = 0;
+        for (let resistance of document.getElementsByClassName("data-5")) {
+            if (count >= totalFields - 1) {
+                resistance.addEventListener("click", function () {
+                    document.getElementById("show-resistance-results-5").value = "Waiting Data ...";
+                })
+            } else {
+                count += 1;
+                continue;
+            }
+        }
+    })
+
+    let menu = document.getElementById("menu");
+    menu.addEventListener("change", function () {
+        let optionSelected = menu.options[menu.selectedIndex].getAttribute("value");
+        if (optionSelected === "5") {
+            document.getElementById("option-menu-5").style.display = "flex";
+            document.getElementById("voltage-divider").addEventListener("click", function () {
+
+                document.getElementById("show-resistance-results-5").value = "Waiting Data ..."
+                
+                let circuitElements = [];
+                for (let resistance of document.getElementsByClassName("data-5")) {
+                    if (resistance.value !== "") {
+                        circuitElements.push(parseFloat(resistance.value));
+                    } else {
+                        circuitElements = [];
+                        break;
+                    }
+                }
+                console.log("circuitElements.length", circuitElements.length);
+
+                if (circuitElements.length) {
+
+                    let [voltage, ...resistances] = circuitElements;
+                    let voltages = getVoltageDivider(voltage, resistances);
+
+                    for (let index = 0; index < voltages.length; index++) {
+                        const element = voltages[index];
+                        if (index > 0) {
+                            document.getElementById("show-resistance-results-5").value += `R${index + 1} = ${element.toFixed(3)};\n`;
+                        }else {
+                            document.getElementById("show-resistance-results-5").value = `R${index + 1} = ${element.toFixed(3)};\n`;
+                        }
+                    }
+
+                } else {
+                    alert("Complete los campos");
+                }
+            })
+        } else {
+            document.getElementById("option-menu-5").style.display = "none";
+        }
+    })
+}
+
 function getEquivalentResistanceSerie(resistances) {
     let result = 0;
     resistances.map(resistance => {
@@ -295,6 +363,16 @@ function getEquivalentInductorParalelo(inductors) {
 
 function getNecessaryResistance(voltage, current){
     return voltage / current;
+}
+
+function getVoltageDivider(voltaje, resistances) {
+    let voltages = [];
+    let sumResistances = 0;
+    resistances.map(resistance => sumResistances += resistance);
+    resistances.forEach(resistance => {
+        voltages.push((voltaje/sumResistances)*resistance);
+    });
+    return voltages;
 }
 
 window.addEventListener("load", iniciarMenu);
