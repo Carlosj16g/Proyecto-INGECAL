@@ -19,6 +19,7 @@
             <option value="3">Inductor Equivalente</option>
             <option value="4">Resistencia Necesaria</option>
             <option value="5">Divisor de Voltaje</option>
+            <option value="6">Resistance según colores</option>
         </select>
     </header>
     <main>
@@ -35,7 +36,8 @@
                 </fieldset>
                 <fieldset>
                     <legend>RESULTADO</legend>
-                    <label for="show-result"><textarea disabled name="" id="show-result" cols="10" rows="5">Waiting Data ...</textarea></label>
+                    <label for="show-result"><textarea disabled name="" id="show-result" cols="10"
+                            rows="5">Waiting Data ...</textarea></label>
                     <div class="center">
                         <button id="resistencia-serie" style="display: none;" type="button">Serie</button>
                         <button id="resistencia-paralelo" style="display: none;" type="button">Paralelo</button>
@@ -57,7 +59,8 @@
                 </fieldset>
                 <fieldset>
                     <legend>RESULTADO</legend>
-                    <label for="show-capacitor-result"><textarea disabled name="" id="show-capacitor-result" cols="10" rows="5">Waiting Data ...</textarea></label>
+                    <label for="show-capacitor-result"><textarea disabled name="" id="show-capacitor-result" cols="10"
+                            rows="5">Waiting Data ...</textarea></label>
                     <div class="center">
                         <button id="capacitor-serie" style="display: none;" type="button">Serie</button>
                         <button id="capacitor-paralelo" style="display: none;" type="button">Paralelo</button>
@@ -79,7 +82,8 @@
                 </fieldset>
                 <fieldset>
                     <legend>RESULTADO</legend>
-                    <label for="show-inductor-result"><textarea disabled name="" id="show-inductor-result" cols="10" rows="5">Waiting Data ...</textarea></label>
+                    <label for="show-inductor-result"><textarea disabled name="" id="show-inductor-result" cols="10"
+                            rows="5">Waiting Data ...</textarea></label>
                     <div class="center">
                         <button id="inductor-serie" style="display: none;" type="button">Serie</button>
                         <button id="inductor-paralelo" style="display: none;" type="button">Paralelo</button>
@@ -100,7 +104,8 @@
                 </fieldset>
                 <fieldset>
                     <legend>RESULTADO</legend>
-                    <label for="show-resistance-result"><textarea disabled name="" id="show-resistance-result" cols="10" rows="5">Waiting Data ...</textarea></label>
+                    <label for="show-resistance-result"><textarea disabled name="" id="show-resistance-result" cols="10"
+                            rows="5">Waiting Data ...</textarea></label>
                 </fieldset>
             </section>
         </div>
@@ -119,7 +124,61 @@
                 </fieldset>
                 <fieldset>
                     <legend>RESULTADO</legend>
-                    <label for="show-resistance-results-5"><textarea disabled name="" id="show-resistance-results-5" cols="15" rows="5">Waiting Data ...</textarea></label>
+                    <label for="show-resistance-results-5"><textarea disabled name="" id="show-resistance-results-5"
+                            cols="15" rows="5">Waiting Data ...</textarea></label>
+                </fieldset>
+            </section>
+        </div>
+
+        <div class="option-menu">
+            <section id="option-menu-6"> <!--style="display: none;"-->
+                <fieldset>
+                    <legend>Ingrese los datos</legend>
+                    <div id="color-fields-6">
+                        <fieldset>
+                            <legend>Banda #1</legend>
+                            <select name="" id="" class="band">
+                                <option value="">select an option</option>
+                            </select>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Banda #2</legend>
+                            <select name="" id="" class="band">
+                                <option value="">select an option</option>
+                            </select>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Banda #3</legend>
+                            <select name="" id="" class="band">
+                                <option value="">select an option</option>
+                            </select>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Banda #4</legend>
+                            <select name="" id="" class="band">
+                                <option value="">select an option</option>
+                            </select>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Banda #5</legend>
+                            <select name="" id="" class="band">
+                                <!--
+                                    <option value="">select an option</option>
+                                    <option value="brown">brown</option>
+                                    <option value="red">red</option>
+                                    <option value="gold">gold</option>
+                                    <option value="silver">silver</option>
+                                -->
+                            </select>
+                        </fieldset>
+
+                    </div>
+                    <input id="voltage-divider" type="submit" value="Calcular">
+                </fieldset>
+                <fieldset>
+                    <legend>RESULTADO</legend>
+                    <label for="show-resistance-results-6"><textarea disabled name="" id="show-resistance-results-5"
+                            cols="15" rows="5">Waiting Data ...</textarea></label>
                 </fieldset>
             </section>
         </div>

@@ -1,3 +1,5 @@
+let colors = ["black", "brown", "red", "orange", "yellow", "green", "blue", "violet", "gray", "white", "gold", "silver"]
+
 function iniciarMenu() {
 
     startOption1();
@@ -5,6 +7,7 @@ function iniciarMenu() {
     startOption3();
     startOption4();
     startOption5();
+    startOption6();
 }
 
 
@@ -327,6 +330,22 @@ function startOption5() {
             document.getElementById("option-menu-5").style.display = "none";
         }
     })
+}
+
+function startOption6() {
+    for (let band of document.getElementsByClassName("band")) {
+        band.addEventListener("change", function () {
+            document.getElementById("show-resistance-results-6").value = "Waiting Data ...";
+        })
+        colors.forEach(color => {
+            if (color == "black") {
+                band.insertAdjacentHTML("beforeend", `<option value="${color}" style="background-color: ${color}; color: white; font-size: 1rem;">${color}</option>`) 
+            }else {
+                band.insertAdjacentHTML("beforeend", `<option value="${color}" style="background-color: ${color}; font-size: 1rem;">${color}</option>`) 
+            }
+        });
+    }
+
 }
 
 function getEquivalentResistanceSerie(resistances) {
