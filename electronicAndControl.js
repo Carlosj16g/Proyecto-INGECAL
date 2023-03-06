@@ -360,9 +360,11 @@ function startOption6() {
     for (let band of document.getElementsByClassName("band")) {
         band.addEventListener("change", function () {
             document.getElementById("show-resistance-results-6").value = "Waiting Data ...";
-            let color = band.options[band.selectedIndex].getAttribute("value")
-            if (color == "black") band.style.color = "white";
-            band.style["background-color"] = color;
+            /* let color = band.options[band.selectedIndex].getAttribute("value");
+            if (color == "black"){
+                band.style["color"] = "white";
+            }
+            band.style["background-color"] = color; */
         })
     }
 
@@ -377,12 +379,7 @@ function startOption6() {
                 count = 0;
                 for (let band of document.getElementsByClassName("band")) {
                     let color = band.options[band.selectedIndex].getAttribute("value");
-                    if (count == 3 && color == "") {
-                        bands[`band-${count + 1}`] = color;
-                    } else if (count == 4 && bands["band-4"] !== "") {
-                        bands[`band-${count + 1}`] = color;
-                    }
-                    else if (color !== "") {
+                    if (color !== "") {
                         bands[`band-${count + 1}`] = color;
                     }
                     count += 1;
@@ -415,7 +412,7 @@ function startOption6() {
                         "red": 2 / 100,
                         "gold": 5 / 100,
                         "silver": 10 / 100,
-                        "": 20 / 100
+                        "none": 20 / 100
                     }
 
                     let selected_bands = [];
@@ -442,7 +439,7 @@ function startOption6() {
                             bandValues.push(multipliers[bands["band-3"]])
                             bandValues.push(tolerances[bands["band-4"]])
                             let result = parseInt("" + bandValues[0] + bandValues[1]) * bandValues[2]
-                            result = `${result} ± ${(result * bandValues[3]).toFixed(3)}`;
+                            result = `${result.toFixed(3)} ± ${(result * bandValues[3]).toFixed(3)}`;
                             document.getElementById("show-resistance-results-6").value = `${result}\n`;
                         }
                         console.log("bandValues", bandValues);
@@ -471,7 +468,7 @@ function startOption6() {
                         "gray": 0.05 / 100,
                         "gold": 5 / 100,
                         "silver": 10 / 100,
-                        "": 20 / 100
+                        "none": 20 / 100
                     }
 
                     let selected_bands = [];
@@ -493,7 +490,7 @@ function startOption6() {
                         bandValues.push(multipliers[bands["band-4"]])
                         bandValues.push(tolerances[bands["band-5"]])
                         let result = parseInt("" + bandValues[0] + bandValues[1] + bandValues[2]) * bandValues[3]
-                        result = `${result} ± ${(result * bandValues[4]).toFixed(3)}`;
+                        result = `${result.toFixed(3)} ± ${(result * bandValues[4]).toFixed(3)}`;
                         document.getElementById("show-resistance-results-6").value = `${result}\n`;
                     }
                     console.log("bandValues", bandValues);
