@@ -1,4 +1,17 @@
-let colors = ["black", "brown", "red", "orange", "yellow", "green", "blue", "violet", "gray", "white", "gold", "silver"]
+let colors = {
+    "black": 0,
+    "brown": 1,
+    "red": 2,
+    "orange": 3,
+    "yellow": 4,
+    "green": 5,
+    "blue": 6,
+    "violet": 7,
+    "gray": 8,
+    "white": 9,
+    "gold": "",
+    "silver": ""
+}
 
 function iniciarMenu() {
 
@@ -296,7 +309,7 @@ function startOption5() {
             document.getElementById("voltage-divider").addEventListener("click", function () {
 
                 document.getElementById("show-resistance-results-5").value = "Waiting Data ..."
-                
+
                 let circuitElements = [];
                 for (let resistance of document.getElementsByClassName("data-5")) {
                     if (resistance.value !== "") {
@@ -317,7 +330,7 @@ function startOption5() {
                         const element = voltages[index];
                         if (index > 0) {
                             document.getElementById("show-resistance-results-5").value += `R${index + 1} = ${element.toFixed(3)};\n`;
-                        }else {
+                        } else {
                             document.getElementById("show-resistance-results-5").value = `R${index + 1} = ${element.toFixed(3)};\n`;
                         }
                     }
@@ -334,17 +347,167 @@ function startOption5() {
 
 function startOption6() {
     for (let band of document.getElementsByClassName("band")) {
-        band.addEventListener("change", function () {
-            document.getElementById("show-resistance-results-6").value = "Waiting Data ...";
-        })
-        colors.forEach(color => {
+
+        Object.keys(colors).forEach(color => {
             if (color == "black") {
-                band.insertAdjacentHTML("beforeend", `<option value="${color}" style="background-color: ${color}; color: white; font-size: 1rem;">${color}</option>`) 
-            }else {
-                band.insertAdjacentHTML("beforeend", `<option value="${color}" style="background-color: ${color}; font-size: 1rem;">${color}</option>`) 
+                band.insertAdjacentHTML("beforeend", `<option value="${color}" style="text-align: center; background-color: ${color}; color: white; font-size: 1rem;">${color}</option>`)
+            } else {
+                band.insertAdjacentHTML("beforeend", `<option value="${color}" style="text-align: center; background-color: ${color}; font-size: 1rem;">${color}</option>`)
             }
         });
     }
+
+    for (let band of document.getElementsByClassName("band")) {
+        band.addEventListener("change", function () {
+            document.getElementById("show-resistance-results-6").value = "Waiting Data ...";
+            let color = band.options[band.selectedIndex].getAttribute("value")
+            if (color == "black") band.style.color = "white";
+            band.style["background-color"] = color;
+        })
+    }
+
+    let menu = document.getElementById("menu");
+    menu.addEventListener("change", function () {
+        let optionSelected = menu.options[menu.selectedIndex].getAttribute("value");
+        if (optionSelected === "6") {
+            document.getElementById("option-menu-6").style.display = "flex";
+            document.getElementById("interpret-colors").addEventListener("click", function () {
+
+                let bands = {};
+                count = 0;
+                for (let band of document.getElementsByClassName("band")) {
+                    let color = band.options[band.selectedIndex].getAttribute("value");
+                    if (count == 3 && color == "") {
+                        bands[`band-${count + 1}`] = color;
+                    } else if (count == 4 && bands["band-4"] !== "") {
+                        bands[`band-${count + 1}`] = color;
+                    }
+                    else if (color !== "") {
+                        bands[`band-${count + 1}`] = color;
+                    }
+                    count += 1;
+                }
+                console.log("bands", bands);
+
+                let isValid = true;
+                let totalBands = Object.keys(bands).length;
+                console.log(totalBands);
+
+                if (totalBands >= 3 && totalBands <= 4) {
+
+                    let multipliers = {
+                        "black": 1e0,
+                        "brown": 1e1,
+                        "red": 1e2,
+                        "orange": 1e3,
+                        "yellow": 1e4,
+                        "green": 1e5,
+                        "blue": 1e6,
+                        "violet": 1e7,
+                        "gray": 1e8,
+                        "white": 1e9,
+                        "gold": 1e-1,
+                        "silver": 1e-2
+                    }
+
+                    let tolerances = {
+                        "brown": 1 / 100,
+                        "red": 2 / 100,
+                        "gold": 5 / 100,
+                        "silver": 10 / 100,
+                        "": 20 / 100
+                    }
+
+                    let selected_bands = [];
+                    Object.keys(bands).map(band => selected_bands.push(band.split("-").pop()))
+
+
+                    if (selected_bands.includes("5")) {
+                        isValid = false;
+                    } else {
+
+                        let bandValues = [];
+                        Object.values(bands).slice(0, 2).map(color => bandValues.push(colors[color]));
+
+                        if (!Object.keys(multipliers).includes(bands["band-3"]) || !Object.keys(tolerances).includes(bands["band-4"])) {
+                            isValid = false;
+                            if (!Object.keys(multipliers).includes(bands["band-3"])) {
+                                document.getElementById("show-resistance-results-6").value = `Los colores válidos para el multiplicador de una resistencia de 4 bandas son:\n`;
+                                Object.keys(multipliers).map(color => document.getElementById("show-resistance-results-6").value += `${color}\n`)
+                            } if (!Object.keys(tolerances).includes(bands["band-4"])) {
+                                document.getElementById("show-resistance-results-6").value = `Los colores válidos para la tolerancia de una resistencia de 4 bandas son:\n`;
+                                Object.keys(tolerances).map(color => document.getElementById("show-resistance-results-6").value += `${color}\n`)
+                            }
+                        } else {
+                            bandValues.push(multipliers[bands["band-3"]])
+                            bandValues.push(tolerances[bands["band-4"]])
+                            let result = parseInt("" + bandValues[0] + bandValues[1]) * bandValues[2]
+                            result = `${result} ± ${(result * bandValues[3]).toFixed(3)}`;
+                            document.getElementById("show-resistance-results-6").value = `${result}\n`;
+                        }
+                        console.log("bandValues", bandValues);
+                    }
+                } else if (totalBands == 5) {
+
+                    let multipliers = {
+                        "black": 1e0,
+                        "brown": 1e1,
+                        "red": 1e2,
+                        "orange": 1e3,
+                        "yellow": 1e4,
+                        "green": 1e5,
+                        "blue": 1e6,
+                        "violet": 1e7,
+                        "gold": 1e-1,
+                        "silver": 1e-2
+                    }
+
+                    let tolerances = {
+                        "brown": 1 / 100,
+                        "red": 2 / 100,
+                        "green": 0.5 / 100,
+                        "blue": 0.25 / 100,
+                        "violet": 0.10 / 100,
+                        "gray": 0.05 / 100,
+                        "gold": 5 / 100,
+                        "silver": 10 / 100,
+                        "": 20 / 100
+                    }
+
+                    let selected_bands = [];
+                    Object.keys(bands).map(band => selected_bands.push(band.split("-").pop()))
+
+                    let bandValues = [];
+                    Object.values(bands).slice(0, 3).map(color => bandValues.push(colors[color]));
+
+                    if (!Object.keys(multipliers).includes(bands["band-4"]) || !Object.keys(tolerances).includes(bands["band-5"])) {
+                        isValid = false;
+                        if (!Object.keys(multipliers).includes(bands["band-4"])) {
+                            document.getElementById("show-resistance-results-6").value = `Los colores válidos para el multiplicador de una resistencia de 5 bandas son:\n`;
+                            Object.keys(multipliers).map(color => document.getElementById("show-resistance-results-6").value += `${color}\n`)
+                        } if (!Object.keys(tolerances).includes(bands["band-5"])) {
+                            document.getElementById("show-resistance-results-6").value = `Los colores válidos para la tolerancia de una resistencia de 5 bandas son:\n`;
+                            Object.keys(tolerances).map(color => document.getElementById("show-resistance-results-6").value += `${color}\n`)
+                        }
+                    } else {
+                        bandValues.push(multipliers[bands["band-4"]])
+                        bandValues.push(tolerances[bands["band-5"]])
+                        let result = parseInt("" + bandValues[0] + bandValues[1] + bandValues[2]) * bandValues[3]
+                        result = `${result} ± ${(result * bandValues[4]).toFixed(3)}`;
+                        document.getElementById("show-resistance-results-6").value = `${result}\n`;
+                    }
+                    console.log("bandValues", bandValues);
+
+                }
+
+                if (!isValid) {
+                    alert("Complete los campos adecuados de forma correcta");
+                }
+            })
+        } else {
+            document.getElementById("option-menu-6").style.display = "none";
+        }
+    })
 
 }
 
@@ -380,7 +543,7 @@ function getEquivalentInductorParalelo(inductors) {
     return getEquivalentResistanceParalelo(inductors);
 }
 
-function getNecessaryResistance(voltage, current){
+function getNecessaryResistance(voltage, current) {
     return voltage / current;
 }
 
@@ -389,7 +552,7 @@ function getVoltageDivider(voltaje, resistances) {
     let sumResistances = 0;
     resistances.map(resistance => sumResistances += resistance);
     resistances.forEach(resistance => {
-        voltages.push((voltaje/sumResistances)*resistance);
+        voltages.push((voltaje / sumResistances) * resistance);
     });
     return voltages;
 }
